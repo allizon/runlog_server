@@ -1,13 +1,4 @@
-export const HUNTER: unique symbol = Symbol("hunter");
-export const WARRIOR: unique symbol = Symbol("warrior");
-export const MAGE: unique symbol = Symbol("mage");
-export const WARLOCK: unique symbol = Symbol("warlock");
-
-export type PlayableClassType =
-  | typeof HUNTER
-  | typeof WARRIOR
-  | typeof MAGE
-  | typeof WARLOCK;
+export type PlayableClassType = "hunter" | "mage" | "warlock" | "warrior";
 
 export interface IPlayableClass {
   name: string;
@@ -22,7 +13,7 @@ export class Hunter implements IPlayableClass {
 
   constructor() {
     this.name = "Hunter";
-    this.type = HUNTER;
+    this.type = "hunter";
     this.pet = "falcon";
   }
 
@@ -37,10 +28,24 @@ export class Warlock implements IPlayableClass {
 
   constructor() {
     this.name = "Warlock";
-    this.type = WARLOCK;
+    this.type = "warlock";
   }
 
   shout = (name: string) => {
     console.log(`I, ${name}, summon demons!`);
+  };
+}
+
+export class Warrior implements IPlayableClass {
+  name: string;
+  type: PlayableClassType;
+
+  constructor() {
+    this.name = "Warrior";
+    this.type = "warrior";
+  }
+
+  shout = (name: string) => {
+    console.log(`I, ${name}, bash things real hard!`);
   };
 }
