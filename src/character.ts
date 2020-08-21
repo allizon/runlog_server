@@ -1,6 +1,6 @@
 import { db, dbClose } from "./database";
 import { HeroClassType, IHeroClass, getHeroClass } from "./heroClasses";
-import { RaceType, IRace } from "./races";
+import { RaceType, IRace } from "./heroRaces";
 
 export default class Character {
   id: number;
