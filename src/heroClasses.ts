@@ -1,14 +1,25 @@
-export type PlayableClassType = "hunter" | "mage" | "warlock" | "warrior";
+export type HeroClassType = "hunter" | "mage" | "warlock" | "warrior";
 
-export interface IPlayableClass {
+export interface IHeroClass {
   name: string;
-  type: PlayableClassType;
+  type: HeroClassType;
   shout(name: string): any;
 }
 
-export class Hunter implements IPlayableClass {
+export const getHeroClass = (heroClassType: HeroClassType) => {
+  switch (heroClassType) {
+    case "hunter":
+      return new Hunter();
+    case "warlock":
+      return new Warlock();
+    case "warrior":
+      return new Warrior();
+  }
+};
+
+export class Hunter implements IHeroClass {
   name: string;
-  type: PlayableClassType;
+  type: HeroClassType;
   pet: string;
 
   constructor() {
@@ -22,9 +33,9 @@ export class Hunter implements IPlayableClass {
   };
 }
 
-export class Warlock implements IPlayableClass {
+export class Warlock implements IHeroClass {
   name: string;
-  type: PlayableClassType;
+  type: HeroClassType;
 
   constructor() {
     this.name = "Warlock";
@@ -36,9 +47,9 @@ export class Warlock implements IPlayableClass {
   };
 }
 
-export class Warrior implements IPlayableClass {
+export class Warrior implements IHeroClass {
   name: string;
-  type: PlayableClassType;
+  type: HeroClassType;
 
   constructor() {
     this.name = "Warrior";

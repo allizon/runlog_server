@@ -1,48 +1,36 @@
 import { db, dbClose } from "./database";
-import {
-  PlayableClassType,
-  IPlayableClass,
-  Hunter,
-  Warlock,
-  Warrior,
-} from "./playableClasses";
+import { HeroClassType, IHeroClass, getHeroClass } from "./heroClasses";
+import { RaceType, IRace } from "./races";
+
+// CharacterFactory
+//    * create base character
+//    * extend w/class
+//    * extend w/race
 
 export default class Character {
   id: number;
   name: string;
-  playableClass: IPlayableClass;
+  heroClass: IHeroClass;
+  race?: IRace;
   level?: number;
 
-  constructor(name: string, playableClassType: PlayableClassType) {
+  constructor(name: string, heroClassType: HeroClassType) {
     this.id = 1;
     this.name = name;
-    this._assignPlayableClass(playableClassType);
+    this.heroClass = getHeroClass(heroClassType);
   }
 
   shout = () => {
-    this.playableClass.shout(this.name);
-  };
-
-  _assignPlayableClass = (playableClassType: PlayableClassType) => {
-    switch (playableClassType) {
-      case "hunter":
-        this.playableClass = new Hunter();
-        break;
-      case "warlock":
-        this.playableClass = new Warlock();
-        break;
-      case "warrior":
-        this.playableClass = new Warrior();
-        break;
-    }
+    this.heroClass.shout(this.name);
   };
 }
 
 export const listCharacters = () => {
   db.serialize(() => {
     db.each(`SELECT * FROM characters`, (err, row) => {
+      console.log("-----");
       console.log(row);
-      let char = new Character(row.name, row.playableClass);
+      let char = new Character(row.name, row.heroClass);
       char.shout();
     });
   });
