@@ -2,11 +2,6 @@ import { db, dbClose } from "./database";
 import { HeroClassType, IHeroClass, getHeroClass } from "./heroClasses";
 import { RaceType, IRace } from "./races";
 
-// CharacterFactory
-//    * create base character
-//    * extend w/class
-//    * extend w/race
-
 export default class Character {
   id: number;
   name: string;
@@ -25,15 +20,35 @@ export default class Character {
   };
 }
 
-export const listCharacters = () => {
-  db.serialize(() => {
-    db.each(`SELECT * FROM characters`, (err, row) => {
-      console.log("-----");
-      console.log(row);
-      let char = new Character(row.name, row.heroClass);
-      char.shout();
-    });
-  });
+// Maybe move this stuff to some sort of "CharacterQuery" module or something
+interface CharacterRecord {
+  id: number;
+  name: string;
+  heroClass: HeroClassType;
+  race: string;
+}
 
+const listRows = (_: object, rows: Array<CharacterRecord>) => {
+  console.log(rows);
+};
+
+const doShout = (_: object, rows: Array<CharacterRecord>) => {
+  rows.forEach((row) => {
+    const char = new Character(row.name, row.heroClass);
+    char.shout();
+  });
+};
+
+const mapToAllCharacters = (func) => {
+  db.all(`SELECT * FROM characters`, func);
+};
+
+// THis is 100% async. Good to know.
+// So maybe this requires a different way of thinking - I don't go get a bunch
+// of results from the database, return them and do something else; we're just
+// going to provide a function to run against all of the results it finds.
+export const listCharacters = () => {
+  mapToAllCharacters(listRows);
+  mapToAllCharacters(doShout);
   dbClose();
 };
