@@ -7,6 +7,7 @@
   "version": "0.1",
   "dependencies": {
     "@types/sqlite3": "^3.1.6",
+    "express": "^4.17.1",
     "immutable": "^4.0.0-rc.12",
     "sqlite3": "^5.0.0",
     "typescript": "^4.0.2"
