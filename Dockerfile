@@ -1,6 +1,6 @@
 FROM node:12.18.3-alpine3.12
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install the packages at a lower level than the app code since it won't
 # change as frequently.
@@ -11,9 +11,7 @@ RUN npm install
 # a rebuild at lower levels (including npm packages).
 COPY . .
 
-EXPOSE 8080
-
-RUN tsc
+# RUN tsc
 CMD ["node", "out/server.js"]
 
 

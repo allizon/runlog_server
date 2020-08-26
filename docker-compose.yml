@@ -1,0 +1,15 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    env_file: postgres.env
+    volumes:
+      - "db_data:/var/lib/postgresql/data"
+
+  web:
+    image: allizon/ts-server
+    ports:
+      - 8080:3000
+
+volumes:
+  db_data:
