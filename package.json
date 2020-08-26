@@ -1,4 +1,10 @@
 {
+  "author": {
+    "name": "Allison Holt",
+    "email": "hey@alli.fyi"
+  },
+  "description": "The server part of my learning project.",
+  "version": "0.1",
   "dependencies": {
     "@types/sqlite3": "^3.1.6",
     "immutable": "^4.0.0-rc.12",
