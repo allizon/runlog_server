@@ -1,4 +1,4 @@
-import { db, dbClose } from "./database";
+// import { db, dbClose } from "./database";
 import { HeroClassType, IHeroClass, getHeroClass } from "./heroClasses";
 import { HeroRaceType, IRace } from "./heroRaces";
 
@@ -40,7 +40,7 @@ const doShout = (_: object, rows: Array<CharacterRecord>) => {
 };
 
 const mapToAllCharacters = (func) => {
-  db.all(`SELECT * FROM characters`, func);
+  // db.all(`SELECT * FROM characters`, func);
 };
 
 // THis is 100% async. Good to know.
@@ -50,5 +50,5 @@ const mapToAllCharacters = (func) => {
 export const listCharacters = () => {
   mapToAllCharacters(listRows);
   mapToAllCharacters(doShout);
-  dbClose();
+  // dbClose();
 };
