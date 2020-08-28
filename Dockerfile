@@ -7,11 +7,15 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
+EXPOSE 3000
+
 # Copy our app code into the image -- when this code changes, it won't force
 # a rebuild at lower levels (including npm packages).
 COPY . .
 
-# RUN tsc
-CMD ["node", "out/server.js"]
+RUN rm -rf out/*
+RUN node_modules/typescript/bin/tsc
+
+CMD ["yarn", "start"]
 
 
