@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "allizon",
+    "password": "AvengersAssemble!!",
+    "database": "runlog_dev",
+    "host": "localhost",
+    "port": 2345,
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "allizon",
+    "password": "AvengersAssemble!!",
+    "database": "runlog_test",
+    "host": "localhost",
+    "port": 2345,
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "allizon",
+    "password": "AvengersAssemble!!",
+    "database": "runlog",
+    "host": "localhost",
+    "port": 2345,
+    "dialect": "postgres"
+  }
+}
