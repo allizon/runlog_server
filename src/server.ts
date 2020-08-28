@@ -3,13 +3,24 @@ import { Client } from "pg";
 
 const app = express();
 const port = 3000;
-const client = new Client();
+
+const client = new Client({
+  user: "allizon",
+  password: "AvengersAssemble!!",
+  host: "db",
+  port: 5432,
+  database: "ts_server_test",
+});
 
 const pgTest = async (response) => {
-  await client.connect();
-  const res = await client.query("SELECT * FROM users");
-  response.send(res.rows[0]);
-  await client.end();
+  try {
+    await client.connect();
+    const res = await client.query("SELECT * FROM users");
+    response.send(res.rows);
+    await client.end();
+  } catch (error) {
+    response.send("Error: " + error);
+  }
 };
 
 app.get("/", (request, response) => {
@@ -19,7 +30,9 @@ app.get("/", (request, response) => {
 });
 
 app.get("/pg", (request, response) => {
-  response.send("Here we b - pg test - and here?!;");
+  // response.send("Here we beeee - pg test - and here?!;");
+  // response.send(client);
+  // response.send("did that work?");
   pgTest(response);
 });
 

@@ -8,14 +8,22 @@ services:
       - "db_data:/var/lib/postgresql/data"
     ports:
       - 2345:5432
+    networks:
+      - backend
   web:
-    image: allizon/ts-server
+    # image: allizon/ts-server
+    build: .
     volumes:
       - type: bind
         source: /Users/alholt/code/ts-server
         target: /app
     ports:
       - 8080:3000
+    networks:
+      - backend
+
+networks:
+  backend:
 
 volumes:
   db_data:
