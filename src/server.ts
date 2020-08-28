@@ -1,5 +1,6 @@
 import express, { response } from "express";
 import { Sequelize } from "sequelize";
+import { User } from "./models/user";
 
 const app = express();
 const port = 3000;
@@ -11,7 +12,19 @@ const sequelize = new Sequelize(
 const sequelizeTest = async (response) => {
   try {
     await sequelize.authenticate();
-    response.send("Connection has been established successfully");
+
+    // await sequelize.drop();
+    // await User.sync({ force: true });
+
+    // const catradora = await User.create({
+    //   name: "Catradora",
+    //   heroClass: "Hunter",
+    // });
+
+    const users = await User.findAll();
+    response.send(users);
+
+    // response.send("All models were synced successfully");
   } catch (error) {
     response.send(error.toString());
   }
