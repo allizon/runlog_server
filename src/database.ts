@@ -1,20 +1,12 @@
-// import { verbose, OPEN_READWRITE, Database } from "sqlite3";
+import { Sequelize } from "sequelize";
 
-// verbose();
-// export const db = new Database("wow-ts.sqlite3", OPEN_READWRITE, (err) => {
-//   if (err) {
-//     console.error(err.message);
-//   }
+// We need a way to switch these depending on if we're calling from
+// the Docker-ized web or from the CLI.
 
-//   // console.log("we connected!");
-// });
+export const sequelizeDocker = new Sequelize(
+  "postgres://allizon:AvengersAssemble!!@db:5432/runlog_dev"
+);
 
-// export const dbClose = () => {
-//   db.close((err) => {
-//     if (err) {
-//       console.error(err.message);
-//     }
-
-//     // console.log("Connection closed");
-//   });
-// };
+export const sequelizeCli = new Sequelize(
+  "postgres://allizon:AvengersAssemble!!@localhost:2345/runlog_dev"
+);

@@ -1,9 +1,8 @@
 import { Sequelize } from "sequelize";
 import { Run } from "./models/run";
+import { sequelizeCli } from "./database";
 
-const sequelize = new Sequelize(
-  "postgres://allizon:AvengersAssemble!!@localhost:2345/runlog_dev"
-);
+const sequelize = sequeliClieb;
 
 (async () => {
   try {
@@ -13,5 +12,7 @@ const sequelize = new Sequelize(
     });
   } catch (error) {
     console.log(error.toString());
+  } finally {
+    sequelize.close();
   }
 })();

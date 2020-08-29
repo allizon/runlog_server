@@ -1,10 +1,9 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
+import { sequelizeDocker, sequelizeCli } from "../database";
 
-// This needs to be methodized...
-const sequelize = new Sequelize(
-  "postgres://allizon:AvengersAssemble!!@db:5432/runlog_dev"
-  // "postgres://allizon:AvengersAssemble!!@localhost:2345/runlog_dev"
-);
+// We need a way to switch these depending on if we're calling from
+// the Docker-ized web or from the CLI.
+const sequelize = sequelizeDocker;
 
 export class Run extends Model {
   /**
@@ -23,6 +22,14 @@ export class Run extends Model {
       return Number.parseFloat((total * 0.621371).toFixed(2));
     });
   }
+
+  static async totalDistanceByMonth(month) {
+    return await 1;
+  }
+
+  static async totalDistanceByWeek(week) {
+    return await 1;
+  }
 }
 
 Run.init(
@@ -34,5 +41,3 @@ Run.init(
   },
   { sequelize, modelName: "Run", tableName: "runs", underscored: true }
 );
-
-// await User.sync({ force: true });
