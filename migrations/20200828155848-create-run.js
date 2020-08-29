@@ -16,17 +16,20 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      duration: {
+        type: Sequelize.FLOAT,
+      },
       description: {
         type: Sequelize.TEXT,
       },
       strava_link: {
         type: Sequelize.STRING,
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE,
       },

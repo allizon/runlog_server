@@ -1,15 +1,29 @@
 import { Sequelize, DataTypes, Model } from "sequelize";
+
+// This needs to be methodized...
 const sequelize = new Sequelize(
-  "postgres://allizon:AvengersAssemble!!@db:5432/ts_server_test"
+  "postgres://allizon:AvengersAssemble!!@db:5432/runlog_dev"
+  // "postgres://allizon:AvengersAssemble!!@localhost:2345/runlog_dev"
 );
 
-export class Run extends Model {}
+export class Run extends Model {
+  /**
+   * @returns [number] The total distance covered in kilometers
+   */
+  static async totalDistanceInKm() {
+    return await this.findAll().then((all) => {
+      const values = all.map((run) => run.getDataValue("distanceInKm"));
+      var total = values.reduce((acc, cur) => acc + cur);
+      return Number.parseFloat(total.toFixed(2));
+    });
+  }
 
-// run_date
-// distance_km
-// duration
-// description
-// (timestamps)
+  static async totalDistanceInMiles() {
+    return await this.totalDistanceInKm().then((total) => {
+      return Number.parseFloat((total * 0.621371).toFixed(2));
+    });
+  }
+}
 
 Run.init(
   {
