@@ -13,7 +13,9 @@ What do I want to build, now that I have a Postgres database and a Node server c
     * OR Import from Strava?
     * OR Add link to Strava?
     * Show "running totals" (hah hah)
+    * Export - I don't want to lose data from the volume (probably an amazon db service or something?) This should be fine as long as I don't go deleting volumes, but some sort of backup would be handy...
 * Oh shit, I probably need tests, huh...
+* minikube, kubectl - for local kubernetes stuff?
 
 ### DB
 ```

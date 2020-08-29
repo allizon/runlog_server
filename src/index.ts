@@ -2,7 +2,7 @@ import { Sequelize } from "sequelize";
 import { Run } from "./models/run";
 import { sequelizeCli } from "./database";
 
-const sequelize = sequeliClieb;
+const sequelize = sequelizeCli;
 
 (async () => {
   try {

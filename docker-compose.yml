@@ -11,8 +11,8 @@ services:
     networks:
       - backend
   web:
-    # image: allizon/ts-server
-    build: .
+    image: allizon/ts-server
+    # build: .
     volumes:
       - type: bind
         source: /Users/alholt/code/ts-server
@@ -27,4 +27,3 @@ networks:
 
 volumes:
   db_data:
-  web_data:
