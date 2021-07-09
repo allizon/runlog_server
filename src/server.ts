@@ -63,6 +63,21 @@ app.get("/run/create", async (request, response, next) => {
   }
 });
 
+app.post("/run/create", async (request, response, next) => {
+  try {
+    await sequelize.authenticate();
+
+    // await Run.create({
+    //   distanceInKm: 6.1,
+    //   runDate: new Date(),
+    //   description: "A new run",
+    // });
+    response.send("<html><body><b>Run added successfully.</b></body></html>");
+  } catch (error) {
+    response.send("error: " + error.toString());
+  }
+});
+
 app.listen(port, () => {
   console.log(`CORS-enabled web server listening at http://localhost:${port}`);
 });
